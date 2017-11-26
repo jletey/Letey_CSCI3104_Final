@@ -1,0 +1,153 @@
+% Document formating
+\documentclass[12pt]{article}
+\setlength{\parindent}{0pt}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parskip}{\baselineskip}
+\usepackage{amsmath,amsfonts,amssymb,wasysym}
+\setlength{\evensidemargin}{1in}
+\addtolength{\evensidemargin}{-1in}
+\setlength{\oddsidemargin}{1.5in}
+\addtolength{\oddsidemargin}{-1.5in}
+\setlength{\topmargin}{1in}
+\addtolength{\topmargin}{-1.5in}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{23cm}
+\setlength{\parskip}{0.75cm}
+
+% Brackets
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% Typesetting options
+\usepackage{fancyvrb}
+\usepackage{tgbonum}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\usepackage{upquote}
+\usepackage{scrextend}
+\addtokomafont{labelinglabel}{\sffamily}
+\usepackage[none]{hyphenat}
+\usepackage{url}
+\newcommand\tab[1][1cm]{\hspace*{#1}} %creates tab command (~5 spaces)
+
+% Tikz settings
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usetikzlibrary {positioning}
+\definecolor {mypurple}{cmyk}{0.6,0.4,0.1,0}
+\definecolor {myred}{cmyk}{0,0.3,0.3,0}
+\usetikzlibrary{fit,shapes.misc}
+
+% Fancy font
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\DeclareMathAlphabet{\mathscrbf}{OMS}{mdugm}{b}{n}
+
+% Other math tools
+\usepackage{mathtools}
+
+% Other useful options
+\usepackage[table]{colortbl}
+
+% Other graphics
+\graphicspath{{PS 7/}}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+\urlstyle{same}
+
+% --------------------------------
+\begin{document}
+
+% ------------- HEADER -----------
+CSCI 3104, Fall 2017 \hfill Final Exam\\
+John Letey (12/11) \hfill john.letey@colorado.edu\vspace{-11mm}
+
+\hrulefill
+
+{\fontfamily{cmr}\selectfont\vspace{-8mm}
+% ##################  PROBLEM 1 #####################
+\section*{{\fontfamily{qcr}\selectfont Problem 1 (20 points)}}\vspace{-10mm}
+\textsl{Given an array $\{a_1, a_2, \cdots; a_n\}$, a reverse is a pair $(a_i, a_j)$ such that $i < j$ but $a_i > a_j$. Design a divide-and-conquer algorithm with a run-time of $\mathcal{O}(n\log(n))$ for computing the number of reverses in the array. Your solution to this question needs to include both a written explanation and a Python implementation of your algorithm, including:}
+\begin{enumerate}
+% ----------------------------  PART 1A  -----------------------------------
+\item[(a)]\textsl{Explain how your algorithm works, including pseudocode.}\\ \\
+The run-time of this algorithm has to be $\mathcal{O}(n\log(n))$, and the algorithm has to be a divide-and-conquer algorithm, so I took a hint and decided to build my algorithm off of the Merge-Sort Algorithm (since it has both the run-time requirement and the algorithm type requirement). Thus, I'm going to have use the same reasoning as the Merge-Sort Algorithm. Here is the pseudocode for the Merge-Sort Algorithm (note that this pseudocode was taken from the book):
+\begin{verbatim}
+// The merge procedure
+Merge(A, p, q, r)
+  1  n1 = q - p + 1
+  2  n2 = r - q
+  3  let L[1 ... n1+1] and R[1 ... n2+1] be new arrays
+  4  for i = 1 to n1
+  5      L[i] = A[p + i - 1]
+  6  for j = 1 to n2
+  7      R[j] = A[q + j]
+  8  L[n1 + 1] = infinity
+  9  R[n2 + 1] = infinity
+ 10  i = 1
+ 11  j = 1
+ 12  for k = p to r
+ 13     if L[i] <= R[j]
+ 14         A[k] = L[i]
+ 15         i = i + 1
+ 16     else A[k] = R[j]
+ 17         j = j + 1
+// The Merge-Sort Algorithm
+Merge-Sort(A, p, r)
+  1  if p < r
+  2     q = floor((p + r)/2)
+  3     Merge-Sort(A, p, q)
+  4     Merge-Sort(A, q + 1, r)
+  5     Merge(A, p, q, r)
+\end{verbatim}
+I now have to modify the above pseudocode to make the algorithm count how many reverses there are in the array. I also have to modify the pseudocode, so that it returns the count instead of just being a void function.
+% ----------------------------  PART 1B  -----------------------------------
+\item[(b)]\textsl{Implement your algorithm in Python.}\\ \\
+Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
+
+% ----------------------------  PART 1C  -----------------------------------
+\item[(c)]\textsl{Randomly generate an array of 100 numbers and use it as input to run your code. Report on both the input to your code and on how the output demonstrates the correctness of your algorithm.}\\ \\
+% Here is a table of inputs and outputs of my program:
+% \begin{center}
+% \begin{tabular}{| c | c |}
+%     \hline
+%     \textbf{Inputs} & \textbf{Outputs} \\
+%     \hline
+    
+% \end{tabular}
+% \end{center}
+\end{enumerate}
+% ====================================
+
+% ##################  PROBLEM 2 #####################
+\section*{{\fontfamily{qcr}\selectfont Problem 2 (25 points)}}\vspace{-10mm}
+\textsl{Suppose that you are assigned a task to do a survey about $n$ important issues (such as education policy and health insurance mandate), by asking a group of $m$ persons questions about these issues. Suppose that a person may not have an opinion about all the issues, and you can ask a person about an issue only if s/he has an opinion about it. We use a bipartite graph $G = \{P \cup I, E\}$ to capture whether a person $p \in P$ has an opinion about an issue $i \in I$ or not: $(p, i) \in E$ means that $p$ has an opinion about $i$. For each issue $i$, in order to have a reliable survey you need to ask at least $l_i$ persons about it, but you may have certain budget constraint so that you can only ask at most $u_i$ persons about it. For each person $p$,
+you may ask her/him between $b_p$ and $t_p$ issues.}\\ \\
+\textsl{Given $G$ and parameters $(l_i, u_i), i \in I$ and $(b_p, t_p), p \in P$, design an algorithm to determine if these parameters are feasible, by formulating it as a problem of finding a routing with lower bounds as in Problem 1 of homework set \#9. You shall solve the problem according to the following steps.}
+\begin{enumerate}
+% ----------------------------  PART 2A  -----------------------------------
+\item[(a)]\textsl{Show how to formulate the parameter feasibility problem as a problem of finding a routing with lower bounds. The resulting problem should be specified by certain graph $G' = \{V', E'\}$ with capacity $c(e)$ and lower bound $l(e)$ for each edge $e \in E'$ and demand $r(v)$ at each vertex $v \in V'$.}\\ \\
+% ----------------------------  PART 2B  -----------------------------------
+\item[(b)]\textsl{Further formulate the problem as a maximum flow problem as in Problem 1 of homework set \#9. The resulting problem should be specified by certain graph $\hat{G} = \{\hat{V}, \hat{E}\}$ with source $s$, sink $t$ and capacity $c(e)$ for each edge $e \in \hat{E}$.}\\ \\
+% ----------------------------  PART 2C  -----------------------------------
+\item[(c)]\textsl{Implement $(a)-(b)$ in Python. Your code should take the graph $G$ and parameters $(l_i, u_i), i \in I$ and $(b_p, t_p), p \in P$ as the input, and produce the graph $\hat{G}$ with source $s$, sink $t$ and capacity $c(e), e \in \hat{E}$ as the output.}\\ \\
+% ----------------------------  PART 2D  -----------------------------------
+\item[(d)]\textsl{}\\ \\
+\end{enumerate}
+% ====================================
+}
+
+\end{document}
