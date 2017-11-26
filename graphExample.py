@@ -7,7 +7,6 @@ Created on Sat Nov 11 15:29:04 2017
 """
 
 import networkx as nx
-import matplotlib.pylab as plt
 
 #create a directed graph
 G = nx.DiGraph()
@@ -70,17 +69,8 @@ G.add_edge('J', 'T', weight=1.0)
 G.add_edge('K', 'T', weight=1.0)
 G.add_edge('L', 'T', weight=1.0)
 
-nx.draw_networkx(G)
-GREEN = "#77DD77"
-BLUE = "#99CCFF"
-
-plt.plot(nx.draw(G, node_color=GREEN, with_labels=True))
-plt.show()
 #each edge has a weight of 1. The shortest path is the fewest edges.
 #Use this to verify that your graph built correctly.
 t = nx.shortest_path(G, 'Spider', 'Fly', weight='weight')
 
 print(t)
-
-
-
