@@ -94,7 +94,8 @@ Merge-Sort(A, p, r)
   4     Merge-Sort(A, q + 1, r)
   5     Merge(A, p, q, r)
 \end{verbatim}
-I now have to modify the above pseudocode to make the algorithm count how many reverses there are in the array. I also have to modify the pseudocode, so that it returns the count instead of just being a void function. There's not a lot I need to change in the \texttt{Merge-Sort} algorithm, but I do need to change a lot in the \texttt{Merge} function. In fact, I will completely be redesigning the \texttt{Merge} function.
+%I now have to modify the above pseudocode to make the algorithm count how many reverses there are in the array. I also have to modify the pseudocode, so that it returns the count instead of just being a void function. There's not a lot I need to change in the \texttt{Merge-Sort} algorithm, but I do need to change a lot in the \texttt{Merge} function. In fact, I will completely be redesigning the \texttt{Merge} function.
+I have to modify the above pseudocode
 % ----------------------------  PART 1B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python.}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
@@ -126,7 +127,13 @@ you may ask her/him between $b_p$ and $t_p$ issues.}\\ \\
 % ----------------------------  PART 2C  -----------------------------------
 \item[(c)]\textsl{Implement $(a)-(b)$ in Python. Your code should take the graph $G$ and parameters $(l_i, u_i), i \in I$ and $(b_p, t_p), p \in P$ as the input, and produce the graph $\hat{G}$ with source $s$, sink $t$ and capacity $c(e), e \in \hat{E}$ as the output.}\\ \\
 % ----------------------------  PART 2D  -----------------------------------
-\item[(d)]\textsl{}\\ \\
+\item[(d)]\textsl{Further implement the Ford-Fulkerson Algorithm in Python to find the maximum flow from $s$ to $t$ over the graph $\hat{G}$.}\\ \\
+% ----------------------------  PART 2E  -----------------------------------
+\item[(e)]\textsl{Generate a test case of parameters according to the following specifications, and run your code to see if the parameters generated are feasible.}
+\begin{itemize}
+  \item \textsl{The number of issues $n = 10$ and the number of person $m = 1000$;}
+  \item \textsl{}
+\end{itemize}
 \end{enumerate}
 % ====================================
 }
