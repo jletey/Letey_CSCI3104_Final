@@ -41,7 +41,7 @@ def CountReverses(A, p, r):
 	# Initialize the variable that will hold the number of reverses in the array A[p:r]
 	count = 0
 	# Calculate the number of reverses in the array A[p:r]
-	if len(A[p:r]) > 1:
+	if len(A[p:r]) > 2:
 		q = math.floor((p + r)/2)
 		count += CountReverses(A, p, q)
 		count += CountReverses(A, q, r)
