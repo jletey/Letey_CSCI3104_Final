@@ -45,7 +45,7 @@ def CountReverses(A, p, r):
 		count += CountReverses(A, q, r)
 		count += Count(A, p, q, r)
 		print('The count is', count)
-	# Return the count
+	# Return the count of reverses in the array A[p:r]
 	return count
 ## Run the program for Problem 1
 # numbers = []
