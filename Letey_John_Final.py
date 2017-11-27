@@ -31,7 +31,7 @@ def Count(A, p, q, r):
 			i += 1
 			# if i <= j:
 			# 	count += 1
-		else:
+		if L[i] > R[j] and i < j:
 			count += 1
 		if A[k] == R[j]:
 			j += 1
