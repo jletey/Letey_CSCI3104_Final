@@ -27,12 +27,12 @@ def Count(A, p, q, r):
 	i, j = 1, 1
 	for k in range(p, r):
 		print(A[k], L[i], R[j], count, k)
+		if L[i] > R[j] and i < j:
+			count += 1
 		if L[i] <= R[j]:
 			i += 1
 			# if i <= j:
 			# 	count += 1
-		if L[i] > R[j] and i < j:
-			count += 1
 		if A[k] == R[j]:
 			j += 1
 	return count
