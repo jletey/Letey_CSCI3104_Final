@@ -29,9 +29,11 @@ def Count(A, p, q, r):
 		print(A[k], L[i], R[j], count, k)
 		if L[i] <= R[j]:
 			i += 1
-			if i <= j:
-				count += 1
-		elif A[k] == R[j]:
+			# if i <= j:
+			# 	count += 1
+		else:
+			count += 1
+		if A[k] == R[j]:
 			j += 1
 	return count
 ## Implementation of CountReverses
