@@ -144,11 +144,11 @@ for i in range(len(nodes)):
 			print('.')
 # Get the source and the target
 source = input('What is the source in your graph? ')
-target = input('What is the sink in your graph? ')
+target = input('What is the target in your graph? ')
 # Get the number of paths from the source to the target
 numOfPaths = countPaths(G, source, target)
 # Tell the user how many paths there are from the source to the target
-print('The number of paths from the source', source, 'to the sink', target, 'is', numOfPaths, 'paths.')
+print('The number of paths from the source', source, 'to the target', target, 'is', numOfPaths, 'paths.')
 ### Problem 5 Code
 print()
 print('Problem #5')
