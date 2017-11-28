@@ -210,6 +210,7 @@ The brute force solution for this algorithm would have a runtime of $\Theta(n!)$
 \begin{enumerate}
 % ----------------------------  PART 4A  -----------------------------------
 \item[(a)]\textsl{Write an algorithm to determine how many different ways can the spider reach the fly by moving along the web’s lines in the directions indicated by the arrows?}\\ \\
+I am going to use recursion for this algorithm. My algorithm will start off by getting all of the predecessor nodes to the target (predecessors are the nodes that you can go to the target from). If any of those predecessor nodes happen to be the source, my algorithm will return 1, since there's exactly one path that goes from the source to the target. Else, it will go through each of the predecessors and count how many paths there are from the source to that predecessor (thus, recursion). My algorithm will return the sum of the counts that each of the recursive calls returned.
 % ----------------------------  PART 4B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python using the NetworkX graph provided as your data structure. You may need to install NetworkX if it isn’t part of your Python installation. Do not use any of the NetworkX features that would make this problem trivial as part of your solution. However, you can use anything in NetworkX to verify your solution. Your algorithm should return an answer to the question in part (a).}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
