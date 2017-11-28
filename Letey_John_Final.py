@@ -71,27 +71,19 @@ print()
 print('Problem #4')
 print('--------------------')
 ## Implementation of countPaths
-def countPaths(G, s, t, count=0):
-	# Get the edges of the graph
-	edges = list(G.edges())
-	# Search the edges for the target t, and check to see if you're an edge away from the source
-	positions = []
-	isDone = False
-	for i in range(len(edges)):
-		start, end = edges[i]
-		if end == t:
-			positions.append(i)
-			count += 1
-			if start == s:
-				isDone = True
-	# Count the paths on each of the different paths
-	if not isDone:
-		for i in positions:
-			start, end = edges[i]
-			count = countPaths(G, s, start, count)
-		return count
-	else:
-		return count
+def countPaths(G, s, t):
+	# Get the predecessors of the node t
+	predecessors = list(G.predecessors(t))
+	# Search the list of predecessors for the source s
+	for predecessor in predecessors:
+		if predecessor == s:
+			return 1
+	# Go to each of the predecessors and calculate all of the paths
+	count = 0
+	for predecessor in predecessors:
+		count += countPaths(G, s, predecessor)
+	# Return the count
+	return count
 ## Run the program for problem 4
 # Initialize the directed graph G
 G = nx.DiGraph()
@@ -113,7 +105,6 @@ G.add_edge('M', 'N', weight=1.0)
 G.add_edge('M', 'F', weight=1.0)
 G.add_edge('N', 'O', weight=1.0)
 G.add_edge('N', 'E', weight=1.0)
-G.add_edge('O', 'Fly', weight=1.0)
 G.add_edge('A', 'S', weight=1.0)
 G.add_edge('A', 'B', weight=1.0)
 G.add_edge('B', 'R', weight=1.0)
