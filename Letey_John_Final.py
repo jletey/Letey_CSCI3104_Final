@@ -12,29 +12,21 @@ print('--------------------')
 ## Implementation of Count
 def Count(A, p, q, r):
 	count = 0
-	n1 = q  - p + 1
-	print('n1 is', n1)
-	n2 = r - q
-	print('n2 is', n2)
-	L = [0 for i in range(n1+1)]
-	R = [0 for i in range(n2+1)]
-	for i in range(n1-1):
-		L[i] = A[p + i - 1]
-	for j in range(n2-1):
-		R[j] = A[q + j]
-	L[n1] = float('inf')
-	R[n2] = float('inf')
-	i, j = 1, 1
-	for k in range(p, r):
-		print(A[k], L[i], R[j], count, k)
-		if L[i] > R[j] and i < j:
+	if (r - q)%2 == 0:
+		L = A[p:q]
+		R = A[q:r]
+	else:
+		L = A[p:q+1]
+		R = A[q+1:r]
+	i, j = 0, 0
+	for k in range(p ,r):
+		if L[i] > R[j]:
 			count += 1
-		if L[i] <= R[j]:
-			i += 1
-			# if i <= j:
-			# 	count += 1
-		if A[k] == R[j]:
 			j += 1
+		else:
+			i += 1
+		if i == len(L) or j == len(R):
+			return count
 	return count
 ## Implementation of CountReverses
 def CountReverses(A, p, r):
@@ -53,7 +45,7 @@ def CountReverses(A, p, r):
 # numbers = []
 # for i in range(100):
 # 	numbers.append(rand.randint(0,100))
-numbers = [1, 11, 10, 16] # 1
+numbers = [21, 11, 10, 16] # 1
 print('Here is an array of randomly generated numbers:', numbers)
 print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)))
 ### Problem 2 Code
