@@ -68,6 +68,33 @@
  
 \urlstyle{same}
 
+% Code colorering
+\usepackage{listings}
+\usepackage{color}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
 % --------------------------------
 \begin{document}
 
@@ -167,6 +194,7 @@ you may ask her/him between $b_p$ and $t_p$ issues.}\\ \\
 \begin{enumerate}
 % ----------------------------  PART 3A  -----------------------------------
 \item[(a)]\textsl{Design algorithm to find the optimal, or near optimal, solution without evaluating all possible combinations. Include an explanation and pseudocode showing how your algorithm works.}\\ \\
+
 % ----------------------------  PART 3B  -----------------------------------
 \item[(b)]\textsl{Compare the runtime complexity of your algorithm with the complexity of a brute force solution.}\\ \\
 The brute force solution for this algorithm would have a runtime of $\Theta(n!)$.
@@ -184,6 +212,26 @@ The brute force solution for this algorithm would have a runtime of $\Theta(n!)$
 \item[(a)]\textsl{Write an algorithm to determine how many different ways can the spider reach the fly by moving along the web’s lines in the directions indicated by the arrows?}\\ \\
 % ----------------------------  PART 4B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python using the NetworkX graph provided as your data structure. You may need to install NetworkX if it isn’t part of your Python installation. Do not use any of the NetworkX features that would make this problem trivial as part of your solution. However, you can use anything in NetworkX to verify your solution. Your algorithm should return an answer to the question in part (a).}\\ \\
+Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
+\begin{lstlisting}[language=Python]
+## Implementation of countPaths
+def countPaths(G, s, t):
+  # Get the predecessors of the target t
+  predecessors = list(G.predecessors(t))
+  # Search the list of predecessors for the source s
+  for predecessor in predecessors:
+    if predecessor == s:
+      return 1
+  # Define a variable that will hold the count of how many paths there
+  # are from s to t
+  count = 0
+  # Go to each of the predecessors and calculate the number of paths
+  for predecessor in predecessors:
+    count += countPaths(G, s, predecessor)
+  # Return the number of paths
+  return count
+\end{lstlisting}
+My program reports that there are $\boxed{141}$ paths that the spider can take to get to the fly.
 \end{enumerate}
 % ====================================
 
