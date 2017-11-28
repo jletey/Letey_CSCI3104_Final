@@ -72,17 +72,18 @@ print('Problem #4')
 print('--------------------')
 ## Implementation of countPaths
 def countPaths(G, s, t):
-	# Get the predecessors of the node t
+	# Get the predecessors of the target t
 	predecessors = list(G.predecessors(t))
 	# Search the list of predecessors for the source s
 	for predecessor in predecessors:
 		if predecessor == s:
 			return 1
-	# Go to each of the predecessors and calculate all of the paths
+	# Define a variable that will hold the count of how many paths there are from s to t
 	count = 0
+	# Go to each of the predecessors and calculate the number of paths
 	for predecessor in predecessors:
 		count += countPaths(G, s, predecessor)
-	# Return the count
+	# Return the number of paths
 	return count
 ## Run the program for problem 4
 # Initialize the directed graph G
