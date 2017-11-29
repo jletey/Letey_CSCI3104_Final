@@ -55,6 +55,7 @@ def CountReverses(A, p, r):
 	count = 0
 	for i in range(len(A)):
 		spike, index = findSpike(A, i, len(A))
+		print(len(A)-index-1)
 		count += len(A)-index-1
 	return count
 ## Run the program for Problem 1
