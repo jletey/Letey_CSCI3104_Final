@@ -78,7 +78,7 @@
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},   
     commentstyle=\color{codegreen},
-    keywordstyle=\color{codepurple},
+    keywordstyle=\color{blue},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
     basicstyle=\footnotesize,
@@ -150,7 +150,20 @@ In the problem, we're given the restraints of the algorithm has to be divide-and
 \item[(b)]\textsl{Implement your algorithm in Python.}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
 \begin{lstlisting}[language=Python]
-## Insert code here
+## Implementation of CountReverses
+def CountReverses(A, p, r):
+  # Initialize the variable that will hold the number of reverses in
+  # the array A[p:r]
+  count = 0
+  # Calculate the number of reverses in the array A[p:r]
+  if p < r:
+    q = math.floor((p + r)/2)
+    count += CountReverses(A, p, q)
+    count += CountReverses(A, q+1, r)
+    count += Count(A, p, q, r)
+    print('The count is', count)
+  # Return the count of reverses in the array A[p:r]
+  return count
 \end{lstlisting}
 % ----------------------------  PART 1C  -----------------------------------
 \item[(c)]\textsl{Randomly generate an array of 100 numbers and use it as input to run your code. Report on both the input to your code and on how the output demonstrates the correctness of your algorithm.}\\ \\

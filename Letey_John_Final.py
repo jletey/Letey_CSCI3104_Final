@@ -9,62 +9,49 @@ import matplotlib.pyplot as plt
 print()
 print('Problem #1')
 print('--------------------')
-## Implementation of findSpike
-def findSpike(A, s, t):
-	mid = (t - s)//2
-	print(mid, A[s:t])
-	# mid = math.floor((s + t)/2)
-	if mid == 0: return A[mid + s], mid + s  # base case 
-	if A[mid + s - 1] < A[mid + s]:
-		return findSpike(A, mid + s, t) # spike is in right-half of A
-	else:
-		return findSpike(A, s, mid + s) # spike is in left-half of A
-# ## Implementation of Count
-# def Count(A, p, q, r):
-# 	count = 0
-# 	if (r - q)%2 == 0:
-# 		L = A[p:q]
-# 		R = A[q:r]
-# 	else:
-# 		L = A[p:q+1]
-# 		R = A[q+1:r]
-# 	i, j = 0, 0
-# 	for k in range(p ,r):
-# 		if L[i] > R[j]:
-# 			count += 1
-# 			j += 1
-# 		else:
-# 			i += 1
-# 		if i == len(L) or j == len(R):
-# 			return count
-# 	return count
+## Implementation of Count
+def Count(A, p, q, r):
+	count = 0
+	n1 = q - p + 1
+	n2 = r - q
+	L = []
+	R = []
+	for i in range(n1):
+		L.append(A[p + i])
+	for j in range(n2):
+		R.append(A[q + j + 1])
+	i, j, k = 0, 0, p
+	while i < n1 and j < n2:
+		if L[i] <= R[j]:
+			A[k] = L[i]
+			i += 1
+		else:
+			A[k] = R[j]
+			j += 1
+			count += (n1 - i)
+		k += 1
+	# Return the number of reverses in the array A[p:r]
+	return count
 ## Implementation of CountReverses
 def CountReverses(A, p, r):
-	# # Initialize the variable that will hold the number of reverses in the array A[p:r]
-	# count = 0
-	# # Calculate the number of reverses in the array A[p:r]
-	# if len(A[p:r]) > 2:
-	# 	q = math.floor((p + r)/2)
-	# 	count += CountReverses(A, p, q)
-	# 	count += CountReverses(A, q, r)
-	# 	count += Count(A, p, q, r)
-	# 	print('The count is', count)
-	# # Return the count of reverses in the array A[p:r]
-	# return count
-
+	# Initialize the variable that will hold the number of reverses in the array A[p:r]
 	count = 0
-	for i in range(len(A)):
-		spike, index = findSpike(A, i, len(A))
-		print(len(A)-index-1)
-		count += len(A)-index-1
+	# Calculate the number of reverses in the array A[p:r]
+	if p < r:
+		q = math.floor((p + r)/2)
+		count += CountReverses(A, p, q)
+		count += CountReverses(A, q+1, r)
+		count += Count(A, p, q, r)
+		print('The count is', count)
+	# Return the count of reverses in the array A[p:r]
 	return count
 ## Run the program for Problem 1
-# numbers = []
-# for i in range(100):
-# 	numbers.append(rand.randint(0,100))
-numbers = [21, 11, 10, 16] # 1
+numbers = []
+for i in range(100):
+	numbers.append(rand.randint(0,100))
+# numbers = [0, 2, 3, 1, 5, 4, 2, 7] # 6
 print('Here is an array of randomly generated numbers:', numbers)
-print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)))
+print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)-1))
 ### Problem 2 Code
 print()
 print('Problem #2')
