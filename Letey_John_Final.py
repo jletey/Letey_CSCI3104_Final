@@ -18,7 +18,7 @@ def findSpike(A, s, t):
 		return findSpike(A, mid + s, t) # spike is in right-half of A
 	else:
 		return findSpike(A, s, mid + s) # spike is in left-half of A
-## Implementation of Count
+# ## Implementation of Count
 # def Count(A, p, q, r):
 # 	count = 0
 # 	if (r - q)%2 == 0:
