@@ -4,42 +4,57 @@ print('Final Exam, John Letey, john.letey@colorado.edu')
 import math
 import random as rand
 import networkx as nx
-import matplotlib.pylab as plt
+import matplotlib.pyplot as plt
 ### Problem 1 Code
 print()
 print('Problem #1')
 print('--------------------')
-## Implementation of Count
-def Count(A, p, q, r):
-	count = 0
-	if (r - q)%2 == 0:
-		L = A[p:q]
-		R = A[q:r]
+## Implementation of findSpike
+def findSpike(A, s, t):
+	mid = (t - s)//2
+	# mid = math.floor((s + t)/2)
+	if mid == 0: return A[mid + s], mid + s  # base case 
+	if A[mid + s - 1] < A[mid + s]:
+		return findSpike(A, mid + s, t) # spike is in right-half of A
 	else:
-		L = A[p:q+1]
-		R = A[q+1:r]
-	i, j = 0, 0
-	for k in range(p ,r):
-		if L[i] > R[j]:
-			count += 1
-			j += 1
-		else:
-			i += 1
-		if i == len(L) or j == len(R):
-			return count
-	return count
+		return findSpike(A, s, mid + s) # spike is in left-half of A
+## Implementation of Count
+# def Count(A, p, q, r):
+# 	count = 0
+# 	if (r - q)%2 == 0:
+# 		L = A[p:q]
+# 		R = A[q:r]
+# 	else:
+# 		L = A[p:q+1]
+# 		R = A[q+1:r]
+# 	i, j = 0, 0
+# 	for k in range(p ,r):
+# 		if L[i] > R[j]:
+# 			count += 1
+# 			j += 1
+# 		else:
+# 			i += 1
+# 		if i == len(L) or j == len(R):
+# 			return count
+# 	return count
 ## Implementation of CountReverses
 def CountReverses(A, p, r):
-	# Initialize the variable that will hold the number of reverses in the array A[p:r]
+	# # Initialize the variable that will hold the number of reverses in the array A[p:r]
+	# count = 0
+	# # Calculate the number of reverses in the array A[p:r]
+	# if len(A[p:r]) > 2:
+	# 	q = math.floor((p + r)/2)
+	# 	count += CountReverses(A, p, q)
+	# 	count += CountReverses(A, q, r)
+	# 	count += Count(A, p, q, r)
+	# 	print('The count is', count)
+	# # Return the count of reverses in the array A[p:r]
+	# return count
+
 	count = 0
-	# Calculate the number of reverses in the array A[p:r]
-	if len(A[p:r]) > 2:
-		q = math.floor((p + r)/2)
-		count += CountReverses(A, p, q)
-		count += CountReverses(A, q, r)
-		count += Count(A, p, q, r)
-		print('The count is', count)
-	# Return the count of reverses in the array A[p:r]
+	for i in range(len(A)):
+		spike, index = findSpike(A, i, len(A))
+		count += len(A)-index-1
 	return count
 ## Run the program for Problem 1
 # numbers = []
