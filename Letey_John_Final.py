@@ -11,16 +11,21 @@ print('Problem #1')
 print('--------------------')
 ## Implementation of Count
 def Count(A, p, q, r):
+	# Initialize the variable that will hold the number of reverses in the array A[p:r]
 	count = 0
+	# Define the size of the left half and right half of the array A[p:r]
 	n1 = q - p + 1
 	n2 = r - q
+	# Calculate the left half and the right half of the array A[p:r]
 	L = []
 	R = []
 	for i in range(n1):
 		L.append(A[p + i])
 	for j in range(n2):
 		R.append(A[q + j + 1])
+	# Define some indeces
 	i, j, k = 0, 0, p
+	# Calculate the number of reverses in the array A[p:r]
 	while i < n1 and j < n2:
 		if L[i] <= R[j]:
 			A[k] = L[i]
