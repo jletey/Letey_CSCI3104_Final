@@ -12,6 +12,7 @@ print('--------------------')
 ## Implementation of findSpike
 def findSpike(A, s, t):
 	mid = (t - s)//2
+	print(mid, A[s:t])
 	# mid = math.floor((s + t)/2)
 	if mid == 0: return A[mid + s], mid + s  # base case 
 	if A[mid + s - 1] < A[mid + s]:
