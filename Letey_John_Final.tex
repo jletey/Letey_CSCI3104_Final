@@ -111,41 +111,42 @@ John Letey (12/11) \hfill john.letey@colorado.edu\vspace{-11mm}
 \begin{enumerate}
 % ----------------------------  PART 1A  -----------------------------------
 \item[(a)]\textsl{Explain how your algorithm works, including pseudocode.}\\ \\
-% The run-time of this algorithm has to be $\mathcal{O}(n\log(n))$, and the algorithm has to be a divide-and-conquer algorithm, so I took a hint and decided to build my algorithm off of the Merge-Sort Algorithm (since it has both the run-time requirement and the algorithm type requirement). Thus, I'm going to have use the same reasoning as the Merge-Sort Algorithm. Here is the pseudocode for the Merge-Sort Algorithm (note that this pseudocode was taken from the book):
-% \begin{verbatim}
-% // The Merge-Sort Algorithm
-% Merge-Sort(A, p, r)
-%   1  if p < r
-%   2     q = floor((p + r)/2)
-%   3     Merge-Sort(A, p, q)
-%   4     Merge-Sort(A, q + 1, r)
-%   5     Merge(A, p, q, r)
-% \end{verbatim}
-% %I now have to modify the above pseudocode to make the algorithm count how many reverses there are in the array. I also have to modify the pseudocode, so that it returns the count instead of just being a void function. There's not a lot I need to change in the \texttt{Merge-Sort} algorithm, but I do need to change a lot in the \texttt{Merge} function. In fact, I will completely be redesigning the \texttt{Merge} function.
-% I have to modify the above pseudocode for the function \texttt{Merge-Sort} to be able to return the number of reverses in the array. I will also modify the pseudocode for the Merge procedure. Here is some pseudocode (also taken from the book) for the Merge procedure:
-% \begin{verbatim}
-% // The merge procedure
-% Merge(A, p, q, r)
-%   1  n1 = q - p + 1
-%   2  n2 = r - q
-%   3  let L[1 ... n1+1] and R[1 ... n2+1] be new arrays
-%   4  for i = 1 to n1
-%   5      L[i] = A[p + i - 1]
-%   6  for j = 1 to n2
-%   7      R[j] = A[q + j]
-%   8  L[n1 + 1] = infinity
-%   9  R[n2 + 1] = infinity
-%  10  i = 1
-%  11  j = 1
-%  12  for k = p to r
-%  13     if L[i] <= R[j]
-%  14         A[k] = L[i]
-%  15         i = i + 1
-%  16     else A[k] = R[j]
-%  17         j = j + 1
-% \end{verbatim}
-% The pseudocode for the \texttt{Merge} procedure will need a lot of modification, unlike the \texttt{Merge-Sort} function.
-In the problem, we're given the restraints of the algorithm has to be divide-and-conquer and its run-time has to be $\mathcal{O}(n\log(n))$.
+The run-time of this algorithm has to be $\mathcal{O}(n\log(n))$, and the algorithm has to be a divide-and-conquer algorithm, so I took a hint and decided to build my algorithm off of the Merge-Sort Algorithm (since it has both the run-time requirement and the algorithm type requirement). Thus, I'm going to have use the same reasoning as the Merge-Sort Algorithm. Here is the pseudocode for the Merge-Sort Algorithm (note that this pseudocode was taken from the book):
+\begin{verbatim}
+// The Merge-Sort Algorithm
+Merge-Sort(A, p, r)
+  1  if p < r
+  2     q = floor((p + r)/2)
+  3     Merge-Sort(A, p, q)
+  4     Merge-Sort(A, q + 1, r)
+  5     Merge(A, p, q, r)
+\end{verbatim}
+%I now have to modify the above pseudocode to make the algorithm count how many reverses there are in the array. I also have to modify the pseudocode, so that it returns the count instead of just being a void function. There's not a lot I need to change in the \texttt{Merge-Sort} algorithm, but I do need to change a lot in the \texttt{Merge} function. In fact, I will completely be redesigning the \texttt{Merge} function.
+I have to modify the above pseudocode for the function \texttt{Merge-Sort} to be able to return the number of reverses in the array. I will also modify the pseudocode for the Merge procedure. Here is some pseudocode (also taken from the book) for the Merge procedure:
+\begin{verbatim}
+// The merge procedure
+Merge(A, p, q, r)
+  1  n1 = q - p + 1
+  2  n2 = r - q
+  3  let L[1 ... n1+1] and R[1 ... n2+1] be new arrays
+  4  for i = 1 to n1
+  5      L[i] = A[p + i - 1]
+  6  for j = 1 to n2
+  7      R[j] = A[q + j]
+  8  L[n1 + 1] = infinity
+  9  R[n2 + 1] = infinity
+ 10  i = 1
+ 11  j = 1
+ 12  for k = p to r
+ 13     if L[i] <= R[j]
+ 14         A[k] = L[i]
+ 15         i = i + 1
+ 16     else 
+ 17         A[k] = R[j]
+ 18         j = j + 1
+\end{verbatim}
+The pseudocode for the \texttt{Merge} procedure will need a lot of modification, unlike the \texttt{Merge-Sort} function.
+% In the problem, we're given the restraints of the algorithm has to be divide-and-conquer and its run-time has to be $\mathcal{O}(n\log(n))$.
 % ----------------------------  PART 1B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python.}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
