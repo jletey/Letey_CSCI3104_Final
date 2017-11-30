@@ -52,6 +52,7 @@ def CountReverses(A, p, r):
 ## Run the program for Problem 1
 numbers = []
 for i in range(100):
+	numbers.append(rand.randint(0,100))
 print('Here is an array of randomly generated numbers:', numbers)
 print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)-1))
 ### Problem 2 Code
