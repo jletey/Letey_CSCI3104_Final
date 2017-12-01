@@ -64,6 +64,7 @@ for i in range(100):
 	numbers.append(rand.randint(0,100))
 print('Here is an array of randomly generated numbers:', numbers)
 print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)-1))
+print('The sorted array is', numbers)
 ### Problem 2 Code
 print()
 print('Problem #2')
