@@ -61,8 +61,10 @@ print('Problem #2')
 print('--------------------')
 ## Implementation of the Ford-Fulkerson Algorithm
 def FordFulkerson(G, s, t):
+	# Define an array that will hold the flow
 	flow = [0 for i in range(len(G.edges))]
-	# while
+	while path_exists_in_residual_net(Gf, s, t):
+
 	return flow
 ## Run the program for problem 2
 
