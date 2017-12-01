@@ -65,7 +65,7 @@ def FordFulkerson(G, s, t):
 	flow = [0 for i in range(len(G.edges))]
 	# Calculate the flow
 	while path_exists_in_residual_net(Gf, s, t):
-
+		
 	# Return the flow
 	return flow
 ## Run the program for problem 2
