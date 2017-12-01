@@ -59,13 +59,16 @@ print('The number of reverses in the array is', CountReverses(numbers, 0, len(nu
 print()
 print('Problem #2')
 print('--------------------')
-## Implementation of the Ford-Fulkerson Algorithm
+## Implementation of path_exists_in_residual_net
+def path_exists_in_residual_net(Gf, s, t):
+	
+## Implementation of Ford-Fulkerson
 def FordFulkerson(G, s, t):
 	# Define an array that will hold the flow
 	flow = [0 for i in range(len(G.edges))]
 	# Calculate the flow
 	while path_exists_in_residual_net(Gf, s, t):
-		
+
 	# Return the flow
 	return flow
 ## Run the program for problem 2
