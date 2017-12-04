@@ -180,7 +180,7 @@ print('Problem #5')
 print('--------------------')
 ## Implementation of whoWasHit
 def whoWasHit(distances):
-	hits = [-1 for i in range(len(distances))]
+	hits = [[] for i in range(len(distances))]
 	for i in range(len(distances)):
 		Min = float('inf')
 		index = 0
@@ -188,7 +188,7 @@ def whoWasHit(distances):
 			if distances[i][j] < Min and i != j:
 				Min = distances[i][j]
 				index = j
-		hits[i] = index
+		hits[index].append(i+1)
 	return hits
 ## Run the program for problem 5
 # Get how many people there are on the field
@@ -204,7 +204,10 @@ for i in range(n):
 			dist = int(input(Str))
 			distances[i][j] = dist
 			distances[j][i] = dist
-# Calculate who gets hit
-print(distances)
+# Calculate who gets hit, and who doesn't
 listOfHits = whoWasHit(distances)
-print(listOfHits)
+# 
+print('Here is a list of who got hit by who:', listOfHits)
+for i in range(n):
+	if listOfHits[i] == []:
+		print('Person', i+1, 'never gets hit')
