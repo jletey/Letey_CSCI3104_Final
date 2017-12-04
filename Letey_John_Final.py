@@ -190,9 +190,8 @@ def whoWasHit(distances):
 				if min >= List[j]:
 					min = List[j]
 					k = 0
-		hits.append(k)
+		hits.append(k+1)
 	return hits
-		
 ## Run the program for problem 5
 # Get how many people there are on the field
 n = int(input('How many people are on the field? '))
