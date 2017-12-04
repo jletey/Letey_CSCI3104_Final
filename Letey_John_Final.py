@@ -69,18 +69,18 @@ print('The sorted array is', numbers)
 print()
 print('Problem #2')
 print('--------------------')
-## Implementation of path_exists_in_residual_net
-def path_exists_in_residual_net(Gf, s, t):
+# ## Implementation of path_exists_in_residual_net
+# def path_exists_in_residual_net(Gf, s, t):
 	
-## Implementation of Ford-Fulkerson
-def FordFulkerson(G, s, t):
-	# Define an array that will hold the flow
-	flow = [0 for i in range(len(G.edges))]
-	# Calculate the flow
-	while path_exists_in_residual_net(Gf, s, t):
+# ## Implementation of Ford-Fulkerson
+# def FordFulkerson(G, s, t):
+# 	# Define an array that will hold the flow
+# 	flow = [0 for i in range(len(G.edges))]
+# 	# Calculate the flow
+# 	while path_exists_in_residual_net(Gf, s, t):
 
-	# Return the flow
-	return flow
+# 	# Return the flow
+# 	return flow
 ## Run the program for problem 2
 
 ### Problem 3 Code
@@ -178,6 +178,33 @@ print('The number of paths from the source', source, 'to the target', target, 'i
 print()
 print('Problem #5')
 print('--------------------')
-##
-
+## Implementation of whoWasHit
+def whoWasHit(distances):
+	hits = []
+	for i in range(len(distances.keys())):
+		List = distances[i]
+		min = float('inf')
+		k = float('inf')
+		for j in range(len(List)):
+			if i != j: # Check to see if i and j are the same person
+				if min >= List[j]:
+					min = List[j]
+					k = 0
+		hits.append(k)
+	return hits
+		
 ## Run the program for problem 5
+# Get how many people there are on the field
+n = int(input('How many people are on the field? '))
+# Get the distances and put them into a dictionary
+distances = {}
+for i in range(n):
+	List = [0 for k in range(n)]
+	for j in range(n):
+		Str = 'What is the distance from person ' + str(i + 1) + ' to person ' + str(j + 1) + '? '
+		dist = int(input(Str))
+		List[j] = dist
+	distances[i] = List
+# Calculate who gets hit
+listOfHits = whoWasHit(distances)
+print(listOfHits)
