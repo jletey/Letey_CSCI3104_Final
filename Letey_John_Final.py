@@ -180,30 +180,31 @@ print('Problem #5')
 print('--------------------')
 ## Implementation of whoWasHit
 def whoWasHit(distances):
-	hits = []
-	for i in range(len(distances.keys())):
-		List = distances[i]
-		min = float('inf')
-		k = float('inf')
-		for j in range(len(List)):
-			if i != j: # Check to see if i and j are the same person
-				if min >= List[j]:
-					min = List[j]
-					k = 0
-		hits.append(k+1)
+	hits = [-1 for i in range(len(distances))]
+	for i in range(len(distances)):
+		Min = float('inf')
+		index = 0
+		for j in range(len(distances)):
+			if distances[i][j] < Min and i != j:
+				Min = distances[i][j]
+				index = j
+		hits[i] = index
 	return hits
 ## Run the program for problem 5
 # Get how many people there are on the field
 n = int(input('How many people are on the field? '))
-# Get the distances and put them into a dictionary
-distances = {}
+# Get the distances and put them into a square list
+distances = [[-1 for i in range(n)] for j in range(n)]
 for i in range(n):
-	List = [0 for k in range(n)]
+	distances[i][i] = float('inf')
+for i in range(n):
 	for j in range(n):
-		Str = 'What is the distance from person ' + str(i + 1) + ' to person ' + str(j + 1) + '? '
-		dist = int(input(Str))
-		List[j] = dist
-	distances[i] = List
+		if i != j and distances[i][j] == -1:
+			Str = 'What is the distance from person ' + str(i + 1) + ' to person ' + str(j + 1) + '? '
+			dist = int(input(Str))
+			distances[i][j] = dist
+			distances[j][i] = dist
 # Calculate who gets hit
+print(distances)
 listOfHits = whoWasHit(distances)
 print(listOfHits)
