@@ -287,6 +287,21 @@ My program reports that there are $\boxed{141}$ paths that the spider can take t
 We're given in the problem that the number of people $n$ is always odd. 
 % ----------------------------  PART 5B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python such that it takes a data structure of people and distances and produces a data structure of who was hit by a balloon.}\\ \\
+Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
+\begin{lstlisting}[language=Python]
+## Implementation of whoWasHit
+def whoWasHit(distances):
+  hits = [[] for i in range(len(distances))]
+  for i in range(len(distances)):
+    Min = float('inf')
+    index = 0
+    for j in range(len(distances)):
+      if distances[i][j] < Min and i != j:
+        Min = distances[i][j]
+        index = j
+    hits[index].append(i+1)
+  return hits
+\end{lstlisting}
 % ----------------------------  PART 5C  -----------------------------------
 \item[(c)]\textsl{Prove that your algorithm is correct. Your proof needs to include specific features of your algorithm.}\\ \\
 % ----------------------------  PART 5D  -----------------------------------
