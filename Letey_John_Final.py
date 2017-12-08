@@ -3,6 +3,7 @@ print('Final Exam, John Letey, john.letey@colorado.edu')
 ### Imports
 import math
 import random as rand
+import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
 ### Problem 1 Code
@@ -81,8 +82,11 @@ print('--------------------')
 
 # 	# Return the flow
 # 	return flow
+# ## Implementation of calculateHatGraph
+# def calculateHatGraph(G, s, t):
+	
 ## Run the program for problem 2
-
+# 
 ### Problem 3 Code
 print()
 print('Problem #3')
@@ -191,23 +195,44 @@ def whoWasHit(distances):
 		hits[index].append(i+1)
 	return hits
 ## Run the program for problem 5
-# Get how many people there are on the field
-n = int(input('How many people are on the field? '))
-# Get the distances and put them into a square list
-distances = [[-1 for i in range(n)] for j in range(n)]
-for i in range(n):
-	distances[i][i] = float('inf')
-for i in range(n):
-	for j in range(n):
-		if i != j and distances[i][j] == -1:
-			Str = 'What is the distance from person ' + str(i + 1) + ' to person ' + str(j + 1) + '? '
-			dist = int(input(Str))
-			distances[i][j] = dist
-			distances[j][i] = dist
-# Calculate who gets hit, and who doesn't
-listOfHits = whoWasHit(distances)
-# 
-print('Here is a list of who got hit by who:', listOfHits)
-for i in range(n):
-	if listOfHits[i] == []:
-		print('Person', i+1, 'never gets hit')
+# Set a list of people on the field
+n = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+# Get the number of tests the user wants to run on the program
+numOfTests = int(input('How many tests do you want to run on my program? '))
+# Randomly generate distances 
+distances = []
+for i in range(numOfTests):
+	ni = n[rand.randint(0, len(n))-1]
+	distance = [[-1 for i in range(ni)] for j in range(ni)]
+	dists = np.random.choice([i for i in range(1, 51)], size=50, replace=False)
+	for j in range(ni):
+		distance[j][j] = float('inf')
+	for j in range(ni):
+		for k in range(ni):
+			if j != k and distance[j][k] == -1:
+				# Str = 'What is the distance from person ' + str(i + 1) + ' to person ' + str(j + 1) + '? '
+				# dist = int(input(Str))
+				distance[j][k] = dists[j]
+				distance[k][j] = dists[j]
+	distances.append(distance)
+# Calculate who gets hit, and who doesn't with all of the test cases
+numOfTrues = 0
+for i in range(numOfTests):
+	# Tell the user what test this is
+	print('==========', i+1, '==========',sep='')
+	# Calculate who gets hit, and who doesn't
+	listOfHits = whoWasHit(distances[i])
+	# Print to the user how many people are on the field
+	print('There are', len(distances[i]), 'people on the field')
+	# Print all the people that didn't get hit
+	didntGetHit = False
+	for j in range(len(distances[i])):
+		if listOfHits[j] == []:
+			print('Person', j+1, 'never gets hit')
+			didntGetHit = True
+	if not didntGetHit:
+		print('Everybody got hit')
+	else:
+		numOfTrues += 1
+# Tell the user how many of the tests were true
+print('\nOut of', numOfTests, 'there were', numOfTrues, 'tests that one or more people were not hit in')
