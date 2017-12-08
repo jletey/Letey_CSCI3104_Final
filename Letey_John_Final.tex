@@ -194,15 +194,7 @@ def CountReverses(A, p, r):
 \end{lstlisting}
 % ----------------------------  PART 1C  -----------------------------------
 \item[(c)]\textsl{Randomly generate an array of 100 numbers and use it as input to run your code. Report on both the input to your code and on how the output demonstrates the correctness of your algorithm.}\\ \\
-% Here is a table of inputs and outputs of my program:
-% \begin{center}
-% \begin{tabular}{| c | c |}
-%     \hline
-%     \textbf{Inputs} & \textbf{Outputs} \\
-%     \hline
-    
-% \end{tabular}
-% \end{center}
+For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4, 24, 19, 96, 96, 73, 63, 61, 57, 9, 85, 24, 39, 2, 36, 18, 32, 0, 21, 53, 73, 9, 90, 81, 82, 0, 69, 92, 39, 62, 57, 46, 6, 97, 56, 24, 88, 15, 21, 13, 70, 40, 11, 3, 23, 72,95, 66, 49, 53, 74, 33, 14, 45, 32, 14, 47, 2, 47, 86, 83, 32, 63, 7, 5, 74, 10, 64, 93, 64, 33, 37, 34, 65, 52, 89, 64, 8, 15, 64, 48, 44,45, 8, 6, 48]}, there are 2713 reverses.
 \end{enumerate}
 % ====================================
 
@@ -236,7 +228,15 @@ def CountReverses(A, p, r):
 \begin{enumerate}
 % ----------------------------  PART 3A  -----------------------------------
 \item[(a)]\textsl{Design algorithm to find the optimal, or near optimal, solution without evaluating all possible combinations. Include an explanation and pseudocode showing how your algorithm works.}\\ \\
-Let's first sort the spears using the Merge-Sort algorithm, which has a runtime of $\mathcal{O}(n\log(n))$. You'd then want to
+% Let's first sort both the spears and the soldiers using the Merge-Sort algorithm, which has a runtime of $\mathcal{O}(n\log(n))$. You'd then want to
+\begin{lstlisting}
+findOptimalSolution(spears, soldiers) {
+  spears = Merge-Sort(spears) // Sort the spears using mergesort
+  soldiers = Merge-Sort(soldiers) // Sort the spears using mergesort
+  pairs = new list of length n
+  
+}
+\end{lstlisting}
 % ----------------------------  PART 3B  -----------------------------------
 \item[(b)]\textsl{Compare the runtime complexity of your algorithm with the complexity of a brute force solution.}\\ \\
 The brute force solution for this algorithm would have a runtime of $\mathcal{O}(n^2)$, since you'd go through every possible combination.
@@ -304,6 +304,7 @@ def whoWasHit(distances):
 \end{lstlisting}
 % ----------------------------  PART 5C  -----------------------------------
 \item[(c)]\textsl{Prove that your algorithm is correct. Your proof needs to include specific features of your algorithm.}\\ \\
+Let $f(m)$ be the boolean function that there is still a survivor whenever $n = 2m + 1$ people stand in a field at distinct distances and each person throws a ballon at their nearest neighbor. To prove this, we have to show that $f(n)$ is true for all 
 % ----------------------------  PART 5D  -----------------------------------
 \item[(d)]\textsl{Analyze the runtime behavior of your algorithm.}\\ \\
 By looking at the above algorithm, you can clearly see that my algorithm has runtim $\boxed{\mathcal{O}(n^2)}$, where $n$ is the number of people on the field.
