@@ -86,7 +86,31 @@ print('--------------------')
 # def calculateHatGraph(G, s, t):
 	
 ## Run the program for problem 2
-# 
+# Get how many issues there are
+numOfIssues = int(input('How many issues are there? '))
+# Set a list of issues, where the numbers correspond to specific issues
+issues = [i+1 for i in range(numOfIssues)]
+# Get how many people there are
+numOfPeople = int(input('How many people are there? '))
+# Randomly generate issues for each person
+IssuesAndPeople = []
+for i in range(numOfPeople):
+	for j in range(numOfIssues):
+		isIssue = bool(rand.randint(0, 1))
+		if isIssue:
+			IssuesAndPeople.append(('Person '+str(i+1), 'Issue '+str(issues[j])))
+# Print the randomly generated list of issues and corresponding people
+print('Here are the edges between people and issues:', IssuesAndPeople)
+# Add in a super source and a super sink to the graph
+for i in range(numOfPeople):
+	IssuesAndPeople.insert(0, ('S', 'Person '+str(i+1)))
+for i in range(numOfIssues):
+	IssuesAndPeople.append(('T', 'Issue '+str(issues[j])))
+# Create a directed graph containing the issues and people
+G = nx.DiGraph()
+G.add_edges_from(IssuesAndPeople)
+# Calculate G^ (GHat)
+# GHat = calculateHatGraph(G, 'S', 'T')
 ### Problem 3 Code
 print()
 print('Problem #3')
@@ -196,7 +220,7 @@ def whoWasHit(distances):
 	return hits
 ## Run the program for problem 5
 # Set a list of people on the field
-n = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+n = [3, 5, 7, 9, 11, 13, 15, 17, 19]
 # Get the number of tests the user wants to run on the program
 numOfTests = int(input('How many tests do you want to run on my program? '))
 # Randomly generate distances 
@@ -210,10 +234,8 @@ for i in range(numOfTests):
 	for j in range(ni):
 		for k in range(ni):
 			if j != k and distance[j][k] == -1:
-				# Str = 'What is the distance from person ' + str(i + 1) + ' to person ' + str(j + 1) + '? '
-				# dist = int(input(Str))
-				distance[j][k] = dists[j]
-				distance[k][j] = dists[j]
+				distance[j][k] = dists[k]
+				distance[k][j] = dists[k]
 	distances.append(distance)
 # Calculate who gets hit, and who doesn't with all of the test cases
 numOfTrues = 0
