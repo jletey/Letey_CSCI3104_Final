@@ -277,7 +277,7 @@ for i in range(numOfTests):
 				distance[j][k] = dists[k]
 				distance[k][j] = dists[k]
 	distances.append(distance)
-# 
+# Get the choice from the user of if the user wants to see the output of each test
 choice = str(input('Do you want to see the ouput of each test? [y/n] '))
 # Calculate who gets hit, and who doesn't with all of the test cases
 numOfTrues = 0
