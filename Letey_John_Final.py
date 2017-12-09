@@ -60,9 +60,11 @@ def CountReverses(A, p, r):
 	# Return the count of reverses in the array A[p:r]
 	return count
 ## Run the program for Problem 1
+# Randomly generate an array of numbers
 numbers = []
 for i in range(100):
 	numbers.append(rand.randint(0,100))
+# 
 choice = str(input('Do you want to see the randomly generated list of numbers? [y/n] '))
 if choice == 'y':
 	print('Here is an array of randomly generated numbers:', numbers)
