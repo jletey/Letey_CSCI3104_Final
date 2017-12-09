@@ -209,6 +209,29 @@ For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4,
 \item[(b)]\textsl{Further formulate the problem as a maximum flow problem as in Problem 1 of homework set \#9. The resulting problem should be specified by certain graph $\hat{G} = \{\hat{V}, \hat{E}\}$ with source $s$, sink $t$ and capacity $c(e)$ for each edge $e \in \hat{E}$.}\\ \\
 % ----------------------------  PART 2C  -----------------------------------
 \item[(c)]\textsl{Implement $(a)-(b)$ in Python. Your code should take the graph $G$ and parameters $(l_i, u_i), i \in I$ and $(b_p, t_p), p \in P$ as the input, and produce the graph $\hat{G}$ with source $s$, sink $t$ and capacity $c(e), e \in \hat{E}$ as the output.}\\ \\
+Here is my Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
+\begin{lstlisting}[language=Python]
+## Implementation of calculateHatGraph
+def calculateHatGraph(G, bptp, liui):
+  # Define another graph to G
+  GHat = G
+  # Add a super source and a super sink to the graph
+  GHat.add_nodes_from(['S', 'T'])
+  # Define indeces
+  personIndex, issueIndex = 0, 0
+  # Add lower bounds
+  for node in list(GHat.nodes()):
+    if node[:5] == 'Issue':
+      if issueIndex < len(liui):
+        GHat.add_edge(node, 'T', lower=liui[issueIndex][0], capacity=liui[issueIndex][1])
+        issueIndex += 1
+    else:
+      if personIndex < len(bptp):
+        GHat.add_edge('S', node, lower=bptp[personIndex][0], capacity=bptp[personIndex][1])
+        personIndex += 1
+  # Return the new graph
+  return GHat
+\end{lstlisting}
 % ----------------------------  PART 2D  -----------------------------------
 \item[(d)]\textsl{Further implement the Ford-Fulkerson Algorithm in Python to find the maximum flow from $s$ to $t$ over the graph $\hat{G}$.}\\ \\
 % ----------------------------  PART 2E  -----------------------------------
@@ -216,7 +239,7 @@ For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4,
 \begin{itemize}
   \item \textsl{The number of issues $n = 10$ and the number of person $m = 1000$;}
   \item \textsl{For any person $p$ and for any issue $i$, s/he has a probability of 50\% to have an opinion about the issue, i.e., there is a 50\% probability that there is a link from $p$ to $i$ in the graph $G$;}
-  \item \textsl{For any person $p$, denote $h_p$ the number of issues that s/he has an opinion about. Let $b_p = \floor{h_p/2}$ and $b_p = h_p$.}
+  \item \textsl{For any person $p$, denote $h_p$ the number of issues that s/he has an opinion about. Let $b_p = \floor{h_p/2}$ and $t_p = h_p$.}
   \item \textsl{For each issue $i$, $l_i$ is drawn uniformly from the interval [300, 400] and $u_i$ uniformly from [500, 700]}
 \end{itemize}
 \end{enumerate}
@@ -228,18 +251,20 @@ For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4,
 \begin{enumerate}
 % ----------------------------  PART 3A  -----------------------------------
 \item[(a)]\textsl{Design algorithm to find the optimal, or near optimal, solution without evaluating all possible combinations. Include an explanation and pseudocode showing how your algorithm works.}\\ \\
-% Let's first sort both the spears and the soldiers using the Merge-Sort algorithm, which has a runtime of $\mathcal{O}(n\log(n))$. You'd then want to
 \begin{lstlisting}
 findOptimalSolution(spears, soldiers) {
   spears = Merge-Sort(spears) // Sort the spears using mergesort
   soldiers = Merge-Sort(soldiers) // Sort the spears using mergesort
   pairs = new list of length n
-  
+  for i = 0 to n {
+    pairs[i] = (soldiers[i], spears[i])
+  }
+  return pairs
 }
 \end{lstlisting}
 % ----------------------------  PART 3B  -----------------------------------
 \item[(b)]\textsl{Compare the runtime complexity of your algorithm with the complexity of a brute force solution.}\\ \\
-The brute force solution for this algorithm would have a runtime of $\mathcal{O}(n^2)$, since you'd go through every possible combination.
+The brute force solution for this algorithm would have a runtime of $\mathcal{O}(n^2)$, since you'd go through every possible combination. My algorithm on the other hand, is $n\log(n) + n\log(n) + n$, which is $\mathcal{O}(n\log(n))$, which is way better than $\mathcal{O}(n^2)$.
 \end{enumerate}
 % ====================================
 

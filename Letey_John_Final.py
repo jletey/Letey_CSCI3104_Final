@@ -86,7 +86,7 @@ print('--------------------')
 
 # 	# Return the flow
 # 	return flow
-# ## Implementation of calculateHatGraph
+## Implementation of calculateHatGraph
 def calculateHatGraph(G, bptp, liui):
 	# Define another graph to G
 	GHat = G
