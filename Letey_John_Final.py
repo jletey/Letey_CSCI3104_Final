@@ -83,8 +83,25 @@ print('--------------------')
 # 	# Return the flow
 # 	return flow
 # ## Implementation of calculateHatGraph
-# def calculateHatGraph(G, s, t):
-	
+def calculateHatGraph(G, bptp, liui):
+	# Define another graph to G
+	GHat = G
+	# Add a super source and a super sink to the graph
+	GHat.add_nodes_from(['S', 'T'])
+	# Define indeces
+	personIndex, issueIndex = 0, 0
+	# Add lower bounds
+	for node in list(GHat.nodes()):
+		if node[:5] == 'Issue':
+			if issueIndex < len(liui):
+				GHat.add_edge(node, 'T', lower=liui[issueIndex][0], capacity=liui[issueIndex][1])
+				issueIndex += 1
+		else:
+			if personIndex < len(bptp):
+				GHat.add_edge('S', node, lower=bptp[personIndex][0], capacity=bptp[personIndex][1])
+				personIndex += 1
+	# Return the new graph
+	return GHat
 ## Run the program for problem 2
 # Get how many issues there are
 numOfIssues = int(input('How many issues are there? '))
@@ -100,17 +117,36 @@ for i in range(numOfPeople):
 		if isIssue:
 			IssuesAndPeople.append(('Person '+str(i+1), 'Issue '+str(issues[j])))
 # Print the randomly generated list of issues and corresponding people
-print('Here are the edges between people and issues:', IssuesAndPeople)
-# Add in a super source and a super sink to the graph
+choice = str(input('Do you want to see the randomly generated list of issues and corresponding issues? [y/n] '))
+if choice == 'y':
+	print('Here are the edges between people and issues:', IssuesAndPeople)
+# 
+bptp = []
 for i in range(numOfPeople):
-	IssuesAndPeople.insert(0, ('S', 'Person '+str(i+1)))
+	tp = 0
+	for j in range(len(IssuesAndPeople)):
+		if IssuesAndPeople[j][0] == 'Person '+str(i+1):
+			tp += 1
+	bp = tp//2
+	bptp.append((bp, tp))
+#
+liui = []
 for i in range(numOfIssues):
-	IssuesAndPeople.append(('T', 'Issue '+str(issues[j])))
+	li = rand.randint(300, 400)
+	ui = rand.randint(500, 700)
+	liui.append((li, ui))
 # Create a directed graph containing the issues and people
 G = nx.DiGraph()
-G.add_edges_from(IssuesAndPeople)
+G.add_edges_from(IssuesAndPeople, lower=0, capacity=1)
 # Calculate G^ (GHat)
-# GHat = calculateHatGraph(G, 'S', 'T')
+GHat = calculateHatGraph(G, bptp, liui)
+inputFlow, flow = nx.maximum_flow(GHat, 'S', 'T')
+#
+print('The input flow to the graph is:', inputFlow)
+#
+choice = str(input('Do you want to see the flow for each person? [y/n] '))
+if choice == 'y':
+	print(flow)
 ### Problem 3 Code
 print()
 print('Problem #3')
