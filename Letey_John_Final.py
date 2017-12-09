@@ -63,9 +63,13 @@ def CountReverses(A, p, r):
 numbers = []
 for i in range(100):
 	numbers.append(rand.randint(0,100))
-print('Here is an array of randomly generated numbers:', numbers)
+choice = str(input('Do you want to see the randomly generated list of numbers? [y/n] '))
+if choice == 'y':
+	print('Here is an array of randomly generated numbers:', numbers)
 print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)-1))
-print('The sorted array is', numbers)
+choice = str(input('Since I used the Merge-Sort algorithm, do you want to see the sorted array? [y/n] '))
+if choice == 'y':
+	print('The sorted array is', numbers)
 ### Problem 2 Code
 print()
 print('Problem #2')
@@ -273,24 +277,32 @@ for i in range(numOfTests):
 				distance[j][k] = dists[k]
 				distance[k][j] = dists[k]
 	distances.append(distance)
+# 
+choice = str(input('Do you want to see the ouput of each test? [y/n] '))
 # Calculate who gets hit, and who doesn't with all of the test cases
 numOfTrues = 0
 for i in range(numOfTests):
 	# Tell the user what test this is
-	print('==========', i+1, '==========',sep='')
+	if choice == 'y':
+		print('==========Test ', i+1, '==========',sep='')
 	# Calculate who gets hit, and who doesn't
 	listOfHits = whoWasHit(distances[i])
 	# Print to the user how many people are on the field
-	print('There are', len(distances[i]), 'people on the field')
+	if choice == 'y':
+		print('There are', len(distances[i]), 'people on the field')
 	# Print all the people that didn't get hit
 	didntGetHit = False
 	for j in range(len(distances[i])):
 		if listOfHits[j] == []:
-			print('Person', j+1, 'never gets hit')
+			if choice == 'y':
+				print('Person', j+1, 'never gets hit')
 			didntGetHit = True
 	if not didntGetHit:
-		print('Everybody got hit')
+		if choice == 'y':
+			print('Everybody got hit')
 	else:
 		numOfTrues += 1
 # Tell the user how many of the tests were true
-print('\nOut of', numOfTests, 'there were', numOfTrues, 'tests that one or more people were not hit in')
+if choice == 'y':
+	print()
+print('Out of', numOfTests, 'there were', numOfTrues, 'tests that one or more people were not hit in')
