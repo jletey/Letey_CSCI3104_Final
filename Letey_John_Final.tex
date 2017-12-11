@@ -205,8 +205,10 @@ For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4,
 \begin{enumerate}
 % ----------------------------  PART 2A  -----------------------------------
 \item[(a)]\textsl{Show how to formulate the parameter feasibility problem as a problem of finding a routing with lower bounds. The resulting problem should be specified by certain graph $G' = \{V', E'\}$ with capacity $c(e)$ and lower bound $l(e)$ for each edge $e \in E'$ and demand $r(v)$ at each vertex $v \in V'$.}\\ \\
+In my algorithm, which is included in part c, all I do is add a super source and a super sink and connect each person to the super source with specified capacities and lower bounds and the issues to the super sink with a specified capacities and lower bounds.
 % ----------------------------  PART 2B  -----------------------------------
 \item[(b)]\textsl{Further formulate the problem as a maximum flow problem as in Problem 1 of homework set \#9. The resulting problem should be specified by certain graph $\hat{G} = \{\hat{V}, \hat{E}\}$ with source $s$, sink $t$ and capacity $c(e)$ for each edge $e \in \hat{E}$.}\\ \\
+I have already made this a max flow problem by adding the nodes and edges that I did in part a.
 % ----------------------------  PART 2C  -----------------------------------
 \item[(c)]\textsl{Implement $(a)-(b)$ in Python. Your code should take the graph $G$ and parameters $(l_i, u_i), i \in I$ and $(b_p, t_p), p \in P$ as the input, and produce the graph $\hat{G}$ with source $s$, sink $t$ and capacity $c(e), e \in \hat{E}$ as the output.}\\ \\
 Here is my Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
@@ -223,17 +225,20 @@ def calculateHatGraph(G, bptp, liui):
   for node in list(GHat.nodes()):
     if node[:5] == 'Issue':
       if issueIndex < len(liui):
-        GHat.add_edge(node, 'T', lower=liui[issueIndex][0], capacity=liui[issueIndex][1])
+        GHat.add_edge(node, 'T', lower=liui[issueIndex][0], 
+                      capacity=liui[issueIndex][1])
         issueIndex += 1
     else:
       if personIndex < len(bptp):
-        GHat.add_edge('S', node, lower=bptp[personIndex][0], capacity=bptp[personIndex][1])
+        GHat.add_edge('S', node, lower=bptp[personIndex][0], 
+                      capacity=bptp[personIndex][1])
         personIndex += 1
   # Return the new graph
   return GHat
 \end{lstlisting}
 % ----------------------------  PART 2D  -----------------------------------
 \item[(d)]\textsl{Further implement the Ford-Fulkerson Algorithm in Python to find the maximum flow from $s$ to $t$ over the graph $\hat{G}$.}\\ \\
+As Chen said, I called the built in NetworkX function.
 % ----------------------------  PART 2E  -----------------------------------
 \item[(e)]\textsl{Generate a test case of parameters according to the following specifications, and run your code to see if the parameters generated are feasible.}
 \begin{itemize}
@@ -242,6 +247,7 @@ def calculateHatGraph(G, bptp, liui):
   \item \textsl{For any person $p$, denote $h_p$ the number of issues that s/he has an opinion about. Let $b_p = \floor{h_p/2}$ and $t_p = h_p$.}
   \item \textsl{For each issue $i$, $l_i$ is drawn uniformly from the interval [300, 400] and $u_i$ uniformly from [500, 700]}
 \end{itemize}
+Please run my code located in \texttt{Letey-John-Final.py}.
 \end{enumerate}
 % ====================================
 
