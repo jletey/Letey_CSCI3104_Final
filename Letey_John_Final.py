@@ -64,30 +64,22 @@ def CountReverses(A, p, r):
 numbers = []
 for i in range(100):
 	numbers.append(rand.randint(0,100))
-# 
+# Get a choice from the user to see if they want to see the randomly generated list of numbers
 choice = str(input('Do you want to see the randomly generated list of numbers? [y/n] '))
+# If the user said yes, print the randomly generated list of numbers
 if choice == 'y':
 	print('Here is an array of randomly generated numbers:', numbers)
+# Print to the user the number of reverses in the randomly generated array
 print('The number of reverses in the array is', CountReverses(numbers, 0, len(numbers)-1))
+# Get a choice from the user to see if they want to see the randomly generated list sorted
 choice = str(input('Since I used the Merge-Sort algorithm, do you want to see the sorted array? [y/n] '))
+# If the user said yes, print the randomly generated list of numbers sorted
 if choice == 'y':
 	print('The sorted array is', numbers)
 ### Problem 2 Code
 print()
 print('Problem #2')
 print('--------------------')
-# ## Implementation of path_exists_in_residual_net
-# def path_exists_in_residual_net(Gf, s, t):
-	
-# ## Implementation of Ford-Fulkerson
-# def FordFulkerson(G, s, t):
-# 	# Define an array that will hold the flow
-# 	flow = [0 for i in range(len(G.edges))]
-# 	# Calculate the flow
-# 	while path_exists_in_residual_net(Gf, s, t):
-
-# 	# Return the flow
-# 	return flow
 ## Implementation of calculateHatGraph
 def calculateHatGraph(G, bptp, liui):
 	# Define another graph to G
@@ -96,14 +88,14 @@ def calculateHatGraph(G, bptp, liui):
 	GHat.add_nodes_from(['S', 'T'])
 	# Define indeces
 	personIndex, issueIndex = 0, 0
-	# Add lower bounds
+	# Add the lower bounds and the capacity bounds
 	for node in list(GHat.nodes()):
 		if node[:5] == 'Issue':
 			if issueIndex < len(liui):
 				GHat.add_edge(node, 'T', lower=liui[issueIndex][0], capacity=liui[issueIndex][1])
 				issueIndex += 1
 		else:
-			if personIndex < len(bptp):
+			if personIndex < len(bptp) and node != 'S' and node != 'T':
 				GHat.add_edge('S', node, lower=bptp[personIndex][0], capacity=bptp[personIndex][1])
 				personIndex += 1
 	# Return the new graph
@@ -122,11 +114,12 @@ for i in range(numOfPeople):
 		isIssue = bool(rand.randint(0, 1))
 		if isIssue:
 			IssuesAndPeople.append(('Person '+str(i+1), 'Issue '+str(issues[j])))
-# Print the randomly generated list of issues and corresponding people
-choice = str(input('Do you want to see the randomly generated list of issues and corresponding issues? [y/n] '))
+# Get a choice from the user to see if they want to see the randomly generated list of people and corresponding issues
+choice = str(input('Do you want to see the randomly generated list of people and corresponding issues? [y/n] '))
+# If the user said yes, print the randomly generated list of people and corresponding issues
 if choice == 'y':
 	print('Here are the edges between people and issues:', IssuesAndPeople)
-# 
+# Randomly generate the lower and upper bounds for the people for each person
 bptp = []
 for i in range(numOfPeople):
 	tp = 0
@@ -135,32 +128,25 @@ for i in range(numOfPeople):
 			tp += 1
 	bp = tp//2
 	bptp.append((bp, tp))
-#
+# Randomly generate the lower and upper bounds for the issues for each issue
 liui = []
 for i in range(numOfIssues):
 	li = rand.randint(300, 400)
 	ui = rand.randint(500, 700)
 	liui.append((li, ui))
-# Create a directed graph containing the issues and people
+# Create a bipartite directed graph containing the issues and people
 G = nx.DiGraph()
 G.add_edges_from(IssuesAndPeople, lower=0, capacity=1)
 # Calculate G^ (GHat)
 GHat = calculateHatGraph(G, bptp, liui)
+# Get the maximum flow of G^ (GHat)
 inputFlow, flow = nx.maximum_flow(GHat, 'S', 'T')
-#
+# Output to the user the input flow that the maximum flow algorithm gave
 print('The input flow to the graph is:', inputFlow)
-#
+# Get a choice from the user if they want to see 
 choice = str(input('Do you want to see the flow for each person? [y/n] '))
 if choice == 'y':
 	print(flow)
-### Problem 3 Code
-print()
-print('Problem #3')
-print('--------------------')
-##
-
-## Run the program for problem 3
-
 ### Problem 4 Code
 print()
 print('Problem #4')
