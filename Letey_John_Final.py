@@ -143,8 +143,9 @@ GHat = calculateHatGraph(G, bptp, liui)
 inputFlow, flow = nx.maximum_flow(GHat, 'S', 'T')
 # Output to the user the input flow that the maximum flow algorithm gave
 print('The input flow to the graph is:', inputFlow)
-# Get a choice from the user if they want to see 
+# Get a choice from the user if they want to see the flow for each person
 choice = str(input('Do you want to see the flow for each person? [y/n] '))
+# If the user said yes, print the flow for each person
 if choice == 'y':
 	print(flow)
 ### Problem 4 Code
