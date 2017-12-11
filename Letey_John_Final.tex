@@ -206,7 +206,7 @@ For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4,
 \begin{enumerate}
 % ----------------------------  PART 2A  -----------------------------------
 \item[(a)]\textsl{Show how to formulate the parameter feasibility problem as a problem of finding a routing with lower bounds. The resulting problem should be specified by certain graph $G' = \{V', E'\}$ with capacity $c(e)$ and lower bound $l(e)$ for each edge $e \in E'$ and demand $r(v)$ at each vertex $v \in V'$.}\\ \\
-My first step to creating my graph is to copy the old graph and add a super source $S$ and a super sink $T$. Then, I connect each person to the super source with an edge going from the super source to the person with lower bound $b_p$ and capacity $t_p$. I also connecct each issue to the super sink with an edge going from the issue to the super sink with lower bound $l_i$ and capacity $u_i$.
+My first step to creating my graph is to copy the old graph and add a super source $S$ and a super sink $T$. Then, I connect each person to the super source with an edge going from the super source to the person with lower bound $b_p$ and capacity $t_p$. I also connect each issue to the super sink with an edge going from the issue to the super sink with lower bound $l_i$ and capacity $u_i$.
 % ----------------------------  PART 2B  -----------------------------------
 \item[(b)]\textsl{Further formulate the problem as a maximum flow problem as in Problem 1 of homework set \#9. The resulting problem should be specified by certain graph $\hat{G} = \{\hat{V}, \hat{E}\}$ with source $s$, sink $t$ and capacity $c(e)$ for each edge $e \in \hat{E}$.}\\ \\
 I have already made this a max flow problem by adding the nodes and edges that I did in part a.
