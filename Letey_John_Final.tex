@@ -144,7 +144,7 @@ Merge(A, p, q, r)
       A[k] = R[j]
       j = j + 1
 \end{lstlisting}
-The pseudocode for the \texttt{Merge} procedure won't need a lot of changes. All I need to do is add a counter for it to return. I will also be getting rid of lines 8 and 9 of the pseudocode.
+The pseudocode for the \texttt{Merge} procedure won't need a lot of changes. All I need to do is add a counter for it to return. I will also be getting rid of lines 8 and 9 of the pseudocode. All I need to modify in the \texttt{merge} and \texttt{Merge-Sort} algorithms is add counters. I added a counter to sum up all of the reverses in the current recursive call, and another counter in the "\texttt{merge}" function, in the else statement when $L[i]>R[j]$, which is exactly what we want.
 % ----------------------------  PART 1B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python.}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
@@ -199,13 +199,14 @@ For the input \texttt{[79, 48, 100, 89, 52, 5, 61, 56, 71, 57, 4, 97, 72, 98, 4,
 % ====================================
 
 % ##################  PROBLEM 2 #####################
+\newpage
 \section*{{\fontfamily{qcr}\selectfont Problem 2 (25 points)}}\vspace{-10mm}
 \textsl{Suppose that you are assigned a task to do a survey about $n$ important issues (such as education policy and health insurance mandate), by asking a group of $m$ persons questions about these issues. Suppose that a person may not have an opinion about all the issues, and you can ask a person about an issue only if s/he has an opinion about it. We use a bipartite graph $G = \{P \cup I, E\}$ to capture whether a person $p \in P$ has an opinion about an issue $i \in I$ or not: $(p, i) \in E$ means that $p$ has an opinion about $i$. For each issue $i$, in order to have a reliable survey you need to ask at least $l_i$ persons about it, but you may have certain budget constraint so that you can only ask at most $u_i$ persons about it. For each person $p$, you may ask her/him between $b_p$ and $t_p$ issues.}\\ \\
 \textsl{Given $G$ and parameters $(l_i, u_i), i \in I$ and $(b_p, t_p), p \in P$, design an algorithm to determine if these parameters are feasible, by formulating it as a problem of finding a routing with lower bounds as in Problem 1 of homework set \#9. You shall solve the problem according to the following steps.}
 \begin{enumerate}
 % ----------------------------  PART 2A  -----------------------------------
 \item[(a)]\textsl{Show how to formulate the parameter feasibility problem as a problem of finding a routing with lower bounds. The resulting problem should be specified by certain graph $G' = \{V', E'\}$ with capacity $c(e)$ and lower bound $l(e)$ for each edge $e \in E'$ and demand $r(v)$ at each vertex $v \in V'$.}\\ \\
-In my algorithm, which is included in part c, all I do is add a super source and a super sink and connect each person to the super source with specified capacities and lower bounds and the issues to the super sink with a specified capacities and lower bounds.
+My first step to creating my graph is to copy the old graph and add a super source $S$ and a super sink $T$. Then, I connect each person to the super source with an edge going from the super source to the person with lower bound $b_p$ and capacity $t_p$. I also connecct each issue to the super sink with an edge going from the issue to the super sink with lower bound $l_i$ and capacity $u_i$.
 % ----------------------------  PART 2B  -----------------------------------
 \item[(b)]\textsl{Further formulate the problem as a maximum flow problem as in Problem 1 of homework set \#9. The resulting problem should be specified by certain graph $\hat{G} = \{\hat{V}, \hat{E}\}$ with source $s$, sink $t$ and capacity $c(e)$ for each edge $e \in \hat{E}$.}\\ \\
 I have already made this a max flow problem by adding the nodes and edges that I did in part a.
@@ -238,7 +239,7 @@ def calculateHatGraph(G, bptp, liui):
 \end{lstlisting}
 % ----------------------------  PART 2D  -----------------------------------
 \item[(d)]\textsl{Further implement the Ford-Fulkerson Algorithm in Python to find the maximum flow from $s$ to $t$ over the graph $\hat{G}$.}\\ \\
-As Chen said, I called the built in NetworkX function.
+As Rhonda said, I called the built in NetworkX function.
 % ----------------------------  PART 2E  -----------------------------------
 \item[(e)]\textsl{Generate a test case of parameters according to the following specifications, and run your code to see if the parameters generated are feasible.}
 \begin{itemize}
@@ -252,6 +253,7 @@ Please run my code located in \texttt{Letey-John-Final.py}.
 % ====================================
 
 % ##################  PROBLEM 3 #####################
+\newpage
 \section*{{\fontfamily{qcr}\selectfont Problem 3 (10 points)}}\vspace{-10mm}
 \textsl{Suppose you have been sent back in time and have arrived at the scene of an ancient Roman battle. It is your job to assign $n$ spears to $n$ Roman soldiers so that each soldier has a spear. It is best if your assignments minimize the difference in heights between the height of the man and the height of his spear. That is, if the $i^{th}$ man has height $m_i$, and his spear has height $s_i$, then you want to minimize: $\sum_{i} \left| ~ m_i - s_i ~ \right|$}
 \begin{enumerate}
@@ -268,6 +270,7 @@ findOptimalSolution(spears, soldiers) {
   return pairs
 }
 \end{lstlisting}
+My algorithm finds the near optimal solution for this problem by sorting the two lists of spears, using the Merge-Sort algorithm, and assigns pairs via same indeces in the lists.
 % ----------------------------  PART 3B  -----------------------------------
 \item[(b)]\textsl{Compare the runtime complexity of your algorithm with the complexity of a brute force solution.}\\ \\
 The brute force solution for this algorithm would have a runtime of $\mathcal{O}(n^2)$, since you'd go through every possible combination. My algorithm on the other hand, is $n\log(n) + n\log(n) + n$, which is $\mathcal{O}(n\log(n))$, which is way better than $\mathcal{O}(n^2)$.
@@ -275,6 +278,7 @@ The brute force solution for this algorithm would have a runtime of $\mathcal{O}
 % ====================================
 
 % ##################  PROBLEM 4 #####################
+\newpage
 \section*{{\fontfamily{qcr}\selectfont Problem 4 (20 points)}}\vspace{-10mm}
 \textsl{Consider the following spider-web graph that shows a spider siting at the bottom of its web, and a fly sitting at the top. On moodle, there is a file called graphExample.py that implements the graph using a library called NetworkX.}
 \begin{center}
@@ -283,7 +287,7 @@ The brute force solution for this algorithm would have a runtime of $\mathcal{O}
 \begin{enumerate}
 % ----------------------------  PART 4A  -----------------------------------
 \item[(a)]\textsl{Write an algorithm to determine how many different ways can the spider reach the fly by moving along the web’s lines in the directions indicated by the arrows?}\\ \\
-I am going to use recursion for this algorithm. My algorithm will start off by getting all of the predecessor nodes to the target (predecessors are the nodes that you can go to the target from). If any of those predecessor nodes happen to be the source, my algorithm will return 1, since there's exactly one path that goes from the source to the target. Else, it will go through each of the predecessors and count how many paths there are from the source to that predecessor (thus, recursion). My algorithm will return the sum of the counts that each of the recursive calls returned.
+I am going to use recursion for this algorithm. My algorithm will start off by getting all of the predecessor nodes to the target (predecessors are nodes where there is an edge from them to the target). If any of those predecessor nodes happen to be the source, my algorithm will return 1, since there's exactly one path that goes from the source to the target. Else, it will go through each of the predecessors and count how many paths there are from the source to that predecessor (thus, recursion). My algorithm will return the sum of the counts that each of the recursive calls returned.
 % ----------------------------  PART 4B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python using the NetworkX graph provided as your data structure. You may need to install NetworkX if it isn’t part of your Python installation. Do not use any of the NetworkX features that would make this problem trivial as part of your solution. However, you can use anything in NetworkX to verify your solution. Your algorithm should return an answer to the question in part (a).}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
@@ -310,12 +314,13 @@ My program reports that there are $\boxed{141}$ paths that the spider can take t
 % ====================================
 
 % ##################  PROBLEM 5 #####################
+\newpage
 \section*{{\fontfamily{qcr}\selectfont Problem 5 (25 points)}}\vspace{-10mm}
 \textsl{There are $n \geq 3$ people positioned on a field (Euclidean plane) so that each has a unique nearest neighbor. Each person has a water balloon. At a signal, everybody hurls his or her balloon at the nearest neighbor. Assume that $n$ is odd and that nobody can miss his or her target.}
 \begin{enumerate}
 % ----------------------------  PART 5A  -----------------------------------
 \item[(a)]\textsl{Write an algorithm to answer the question: Is it true or false that there always remains at least one person not hit by a balloon?}\\ \\
-We're given in the problem that the number of people $n$ is always odd. 
+This is true. Part (c) proves this is true for any odd $n$ by mathematical induction, while my code finds who was hit. 
 % ----------------------------  PART 5B  -----------------------------------
 \item[(b)]\textsl{Implement your algorithm in Python such that it takes a data structure of people and distances and produces a data structure of who was hit by a balloon.}\\ \\
 Here is my Python code, which is also included in \texttt{Letey-John-Final.py}:
@@ -335,17 +340,17 @@ def whoWasHit(distances):
 \end{lstlisting}
 % ----------------------------  PART 5C  -----------------------------------
 \item[(c)]\textsl{Prove that your algorithm is correct. Your proof needs to include specific features of your algorithm.}\\ \\
-%Let $f(m)$ be the boolean function that there is still a survivor whenever $n = 2m + 1$ people stand in a field at distinct distances and each person throws a ballon at their nearest neighbor. To prove this, we have to show that $f(n)$ is true for all 
-Let's use induction for this proof. Let's first define the predicate $f(m)$ to be the predicate that there is a survivor whenever $2m + 1$ people stand in the field, and each person throws a balloon at there nearest neighbor. To prove this, we'll need to show that the predicate $f(m)$ is true for all integers $m$ that are positive. \\ \\
+Let's use induction for this proof. Let's first define the predicate $f(m)$ to be the predicate that there is a survivor whenever $2m + 1$ people stand in the field (and each person throws a balloon at their nearest neighbor. To prove this, we'll need to show that the predicate $f(m)$ is true for all integers $m$ that are positive. \\ \\
 \textbf{Base Case:} $m = 1$ \\
-When $m = 1$, there are $n = 2m + 1 = 3$ people on the field. Since the distances between the pairs of people are distinct, the distance between person 1 and 3 and the distance between person 2 and 3 are both different, and greater than the distance between person 1 and 2. Thus, persons 1 and 2 throw balloons at each other, and person 3 throws a balloon at either person 1 or 2, implying person 3 never gets hit. \\
-\textbf{Inductive Step:} Assume that the predicate $f(k)$ is true for an arbitary integer k. Prove that the predicate $P(k + 1)$ is true \\
-Suppose that we have $n = 2k + 3$ people on the field with distinct distances between people. Let's define person 1 and person 2 to be a closest pair of people in the group of people. When each person throughs a balloon at another, person 1 and person 2 through balloons at each other. Thus, we have two cases, where \textit{i}, another person throughs a balloon at either person 1 or person 2 and, \textit{ii}, no other person throughs a balloon at either person 1 or person 2 \\
-\textit{Case 1:} Because person 1 and person 2 throw balloons at each other, and someone else throughs a balloon at either person 1 or person 2, at least 3 balloons are thrown at person 1 and person 2, which implies at most $2k$ balloons are thrown at the remaining $2k + 1$ people. Therefore, throws at least one balloon at each person, there will still be a least one person standing. \\
-\textit{Case 2:} Other than person 1 and person 2, there are $2k + 1$ people on the field. Because the distances are all distinct between pairs of neighbors, we can use the inductive hypothesis to say that there is at least one survivor that wasn't hit.
+When $m = 1$ there are $n = 2m + 1 = 3$ people on the field. Suppose $d(i, j)$ is the distance between people $i$ and $j$. We can assume, without any loss of generality, that $d(1, 2) < d(1, 3) < d(2, 3)$. Thus persons 1 and 2 both throw to each other, and person 3 throws to person 1. This means that person 3 is never hit. \\
+\textbf{Inductive Step:} Assume that the predicate $f(k)$ is true for an arbitrary integer k. Prove that the predicate $f(k + 1)$ is true. \\
+Suppose that we have $n = 2(k + 1) + 1 = 2k + 3$ people on the field with distinct distances between people. Let's define person 1 and 2 to be two people that will both throw to each other (they're each other's nearest neighbor). Thus, we have two cases: \textit{Case 1}, where another person throws a balloon at either person 1 or person 2, or \textit{Case 2}, where no other person throws a balloon at either person 1 or person 2 \\ \\
+\textit{Case 1:} Because person 1 and person 2 throw balloons at each other, and someone else (person 3) throws a balloon at either person 1 or person 2, there are 3 balloon thrown in total between persons 1, 2, and 3. This implies at most $2k$ balloons are thrown at the remaining $2k + 1$ people, because we had $2k + 3$ balloons to start with. Therefore, there must be at least one person remaining because we don't have enough balloons. \\ \\
+\textit{Case 2:} Other than person 1 and person 2, there are $2k + 1$ people on the field. Because the distances are all distinct between pairs of neighbors, we can use the inductive hypothesis to say that there is at least one survivor that wasn't hit. \\ \\ 
+Thus, $f(k + 1)$ also holds.
 % ----------------------------  PART 5D  -----------------------------------
 \item[(d)]\textsl{Analyze the runtime behavior of your algorithm.}\\ \\
-By looking at the above algorithm, you can clearly see that my algorithm has runtim $\boxed{\mathcal{O}(n^2)}$, where $n$ is the number of people on the field.
+By looking at the above algorithm, you can clearly see that my algorithm has runtime $\boxed{\mathcal{O}(n^2)}$, where $n$ is the number of people on the field.
 \end{enumerate}
 % ====================================
 }

@@ -136,7 +136,7 @@ for i in range(numOfIssues):
 	liui.append((li, ui))
 # Create a bipartite directed graph containing the issues and people
 G = nx.DiGraph()
-G.add_edges_from(IssuesAndPeople, lower=0, capacity=1)
+G.add_edges_from(IssuesAndPeople)
 # Calculate G^ (GHat)
 GHat = calculateHatGraph(G, bptp, liui)
 # Get the maximum flow of G^ (GHat)
